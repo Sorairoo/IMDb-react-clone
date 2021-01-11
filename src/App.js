@@ -2,7 +2,7 @@ import './App.css';
 import React,{Component} from 'react';
 import VideoList from './components/movie_list';
 import NavBar from './components/nav_bar';
-const APIKEY='git';
+const APIKEY='';
 const APIURL="http://www.omdbapi.com";
 class  App extends Component {
   constructor(props){
