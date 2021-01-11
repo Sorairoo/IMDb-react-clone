@@ -1,7 +1,8 @@
 import './App.css';
 import React,{Component} from 'react';
 import VideoList from './components/movie_list';
-const APIKEY='';
+import NavBar from './components/nav_bar';
+const APIKEY='git';
 const APIURL="http://www.omdbapi.com";
 class  App extends Component {
   constructor(props){
@@ -12,25 +13,36 @@ class  App extends Component {
     }
     
   }
-  fetchMovies(search = '=back to the future') {
+  fetchMovies =  (search = '') => {
 
     return fetch(APIURL + '?apikey=' + APIKEY +'&s='+ search).then( res => res.json());
       
   };
   render(){
     return (
-      <div className="App">
+      <div className="App container">
+        <NavBar onSearchTerm = {this.searchMovies}></NavBar>
       <h1>My favorite movies</h1>
       <VideoList movies={this.state.movies}/>
      </div>
     );
   }
+  searchMovies = (term = '') =>{
+    if(term.length< 3){
+      return
+    }
+    this.fetchMovies(term).then(res => {
+      console.log(this)
+     this.setState({
+       movies : res.Search,
+       totalCount : res.totalResults,
+     })
+   })
+
+ };
   componentDidMount(){
-    this.fetchMovies().then(res => {
-      this.setState({
-        movies : res.Search
-      })
-    })
+    this.searchMovies('')
+
   }
 }
 

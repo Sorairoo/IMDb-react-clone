@@ -1,10 +1,11 @@
 import React from 'react';
-
+import MovieItem from './movie_item';
 function videoList(props){
     return(
-        <ul>
-            {props.movies.map(movie => <li key={movie.imdbID}>{movie.Title}</li>)}
-        </ul>
+        <div className="row">
+            {props.movies ? props.movies.map(movie => <MovieItem key={movie.imdbID} movie={movie}/> ) : null}
+        </div>
+        
     )
 }
 export default videoList;
